@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: github.com
+Token: 5965faf3bd7db5dc526413d139f18f2c6bfce9acdba9c5c192c0603cd4a2c70e
