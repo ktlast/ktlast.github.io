@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <style>
 canvas {
     border:1px solid #d3d3d3;
@@ -30,9 +30,9 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    height:30px;
-    width:30px;
+    font-size: 18px;
+    height:40px;
+    width:40px;
 }
 button:hover {
     background-color: #fcc5a0;
@@ -45,10 +45,10 @@ button:hover {
 
 <h1 id ="title">Merge it until all red! </h1>
 <br><br>
-<h2 id ="merge">#Merged - 0　　</h2>
+<h2 id ="merge">#Merged 次數 - 0　　</h2>
 <h2 id ="red">red - </h2>
 <h2 id ="redcount">0/36　　</h2>
-<h2 id ="cheat">cheated - 0 　　</h2>
+<h2 id ="cheat">洗牌次數 - 0 　　</h2>
 <br>
 <br>
 <p id="mainarray"></p>
@@ -60,7 +60,7 @@ button:hover {
 <button onclick="merge([0,2])" id ="02"></button>
 <button onclick="merge([0,3])" id ="03"></button>
 <button onclick="merge([0,4])" id ="04"></button>
-<button onclick="merge([0,5])" id ="05"></button> 
+<button onclick="merge([0,5])" id ="05"></button>
 <br>
 <button onclick="merge([1,0])" id ="10"></button>
 <button onclick="merge([1,1])" id ="11"></button>
@@ -97,7 +97,10 @@ button:hover {
 <button onclick="merge([5,4])" id ="54"></button>
 <button onclick="merge([5,5])" id ="55"></button>
 <br>
----- <button onclick="startGame()" style="height:25px;width:100px">Shuffle</button>
+<br>
+<br>
+<br>
+走投無路 --- >>> <button onclick="startGame()" style="height:30px;width:100px">洗牌</button>
 <br>
 <script>
 var current_pos = [];
@@ -127,7 +130,7 @@ function startGame() {
 	//ulti_state_array();
 	//swap([1,2],[2,2])
 	cheat++;
-	document.getElementById("cheat").innerHTML = "cheated - "+cheat+"　　";
+	document.getElementById("cheat").innerHTML = "洗牌次數 - "+cheat+"　　";
 }
 
 function newray(){
@@ -169,7 +172,7 @@ function new_ptag(){
 function newdraw(matrix){
 	for(var i=0; i<arena_scale; i++){
 		for (var j=0;j<arena_scale;j++){
-		//document.write(matrix[i].join(" - "));	
+		//document.write(matrix[i].join(" - "));
 		//document.write("<br>");
 		var sid = String(i)+String(j);
 		document.getElementById(sid).innerHTML = matrix[i][j];//+" - ";
@@ -181,7 +184,7 @@ function newdraw(matrix){
 function pos2id(pos){
 	var target = String(pos[0])+String(pos[1]);
 	return target;
-}	
+}
 
 function getQ(pos){
 	valueQ = document.getElementById(pos2id(pos)).innerHTML;
@@ -198,7 +201,7 @@ function swap (pos1,pos2){
 	var t2 = pos2id(pos2);
 	var x = getQ(pos2);
 	var y = getQ(pos1);
-	
+
 	document.getElementById(t1).innerHTML = y + " - ";
 	document.getElementById(t2).innerHTML = x + " - ";
 }
@@ -224,8 +227,8 @@ function ckarr(ray, v) {
 }
 
 function deter_direction(pos){
-	
-	
+
+
 	if (pos[0] == 0 && pos[1] == 0){
 		var cp_list = [[1,0],[0,1]];
 		return cp_list;
@@ -242,7 +245,7 @@ function deter_direction(pos){
 		var cp_list = [[arena_scale-2, 0],[arena_scale-1, 1]];
 		return cp_list;
 	}
-	
+
 	else if (pos[0] == 0 && pos[1] >= 1){
 		var cp_list = [[pos[0]+1, pos[1]], [pos[0],pos[1]-1], [pos[0], pos[1]+1]];
 		return cp_list;
@@ -259,7 +262,7 @@ function deter_direction(pos){
 		var cp_list = [[pos[0], pos[1]-1], [pos[0]-1, pos[1]], [pos[0]+1, pos[1]]];
 		return cp_list;
 	}
-	
+
 	else{
 		var cp_list = [[pos[0]-1, pos[1]], [pos[0]+1, pos[1]], [pos[0], pos[1]-1], [pos[0], pos[1]+1]];
 		return cp_list;
@@ -267,9 +270,9 @@ function deter_direction(pos){
 }
 
 function merge(center){
-	
+
 	var compare_list = deter_direction(center);
-	
+
 	for(var i = compare_list.length - 1; i >= 0; i--) {
 		if(getQ(compare_list[i]) != getQ(center)) {
 		   compare_list.splice(i, 1);
@@ -279,10 +282,10 @@ function merge(center){
 		for(var i=0; i<compare_list.length;i++){
 			update(compare_list[i],roll(max_ger_Q));
 		}
-		
+
 		update(center,getQ(center)+1);
 		clicktimes++;
-		document.getElementById("merge").innerHTML = "#Merged - "+clicktimes+"　　";
+		document.getElementById("merge").innerHTML = "#Merged 次數 - "+clicktimes+"　　";
 	}
 
 	if (getQ(center) > max_Q){
@@ -294,7 +297,7 @@ function merge(center){
 			document.getElementById(pos2id(center)).style.color = "black";
 			red--;
 		}
-		
+
 		document.getElementById("redcount").innerHTML = red+"/36 　　";
 		//if (ulti_state[center[0]][center[1]] == 0){
 		//	ulti_state[center[0]][center[1]] = 1;
@@ -304,7 +307,7 @@ function merge(center){
 		//}
 		update(center,roll(max_ger_Q));//roll(max_ger_Q));
 		//document.getElementById(pos2id(center)).style.color = "red";
-		
+
 	}
 
 	var decColor = Math.floor(Math.pow((red/36),0.5)*225);
@@ -320,10 +323,55 @@ function merge(center){
 	}
 
 
+	if (red > 1) {
+    level_max = 5;
+    post_comment = "";
+    clicktimes = 144
 
-	if (red == 36){
-		window.alert("Merged: "+clicktimes+" 次\nCheated: "+cheated+" \n花太多步了吧");
-		location.reload(); 
+    if ((clicktimes <= 125) && (cheat <= 0)) {
+      level = 5;
+      click_threshold = 125
+      cheat_threshold = 0
+      post_comment = "\n天才兒童？\n";
+    }
+    else if ((clicktimes <= 125) && (cheat <= 3)) {
+      level = 4;
+      click_threshold = 125
+      cheat_threshold = 3
+      post_comment = "\n要是沒洗牌就滿分！\n";
+    }
+    else if ((clicktimes <= 140) && (cheat <= 3)) {
+      level = 3;
+      click_threshold = 140
+      cheat_threshold = 3
+      post_comment = "\n再加油一下！\n";
+    }
+    else if ((clicktimes <= 155) && (cheat <= 3)) {
+      level = 2;
+      click_threshold = 155
+      cheat_threshold = 3
+      post_comment = "\n次數可以再少一點！\n";
+    }
+    else if ((clicktimes <= 170) && (cheat <= 4)) {
+      level = 1;
+      click_threshold = 170
+      cheat_threshold = 4
+      post_comment = "\n次數有點太多了！\n";
+    }
+    else {
+      level = 0;
+      click_threshold = "X_X"
+      cheat_threshold = "X_X"
+      post_comment = "\n也花太多步了吧！\n";
+    }
+
+    level_string = "★".repeat(level) + "☆".repeat(level_max - level);
+    merge_string = "Merged: " + clicktimes + " 次  ( < " + click_threshold +" )\n"
+    cheat_string = "洗牌次數: " + cheat + " 次  ( < " + cheat_threshold +" )\n"
+    message = merge_string + cheat_string + "\n評分："+level_string+ "\n" ;
+
+		window.alert(message + post_comment);
+		//location.reload();
 	}
 
 }
@@ -341,16 +389,18 @@ function tmp(){
 	window.onload();
 	}
 
-	
+
+
 </script>
 <br>
 
-<p><font size=4>點按鈕來融合該位置的數字</font></p><br>
-<p><font size=4>若周圍有相同的數字會融合 +1；被吸收的位置會亂數產生新數字</font></p><br>
-<p><font size=4>當超過 4 的時候該位置會變成紅色</font></p><br>
-<p><font size=4>全部的位置都變成紅色就結算囉</font></p><br>
-<p><font size=4>*若你太廢玩到卡住了，只好點 shuffle 洗牌</font></p><br>
+
+
+<p><font size=4>1. 點按鈕來試著融合該位置的數字</font></p><br>
+<p><font size=4>2. 若周圍有相同的數字會融合 +1；被吸收的位置會亂數產生新數字</font></p><br>
+<p><font size=4>3. 當超過 4 的時候該位置會變成紅色</font></p><br>
+<p><font size=4>4. 全部的位置都變成紅色就結算囉</font></p><br>
+<p><font size=4>*若你太廢玩到卡住了，只好點 [洗牌]</font></p><br>
 
 </body>
 </html>
-
