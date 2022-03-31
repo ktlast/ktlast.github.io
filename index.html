@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <meta charset="UTF-8">
 <style>
 canvas {
@@ -131,9 +132,10 @@ max_ger_Q = 4;
 var step = 0;
 ulti_state = [];
 clicktimes = 0;
-cheat = -1;
+cheat = 6;
 red = 0;
 drawed_pos = [];
+cheat_string_color = 0xffffff;
 
 //Qblack = "#222222";
 //Qred = "#ff1234";
@@ -148,8 +150,21 @@ function startGame() {
 	newdraw(QB);
 	//ulti_state_array();
 	//swap([1,2],[2,2])
-	cheat++;
-	document.getElementById("cheat").innerHTML = "洗牌次數 - " + cheat;
+	cheat--;
+
+  cheat_string_color = cheat_string_color - 0x222222;
+
+	document.getElementById("cheat").innerHTML = "洗牌次數剩 - " + cheat + " 次";
+  document.getElementById("cheat").style.color = "#"+(cheat_string_color).toString(16);
+  if (cheat == 1) {
+    message = "剩下最後一次洗牌機會！"
+    window.alert(message);
+  }
+  else if (cheat == 0) {
+    message = "洗牌次數用完了，很可惜... \n\n點擊確認重新開始。"
+    window.alert(message);
+    window.location.reload();
+  }
 }
 
 function newray(){
@@ -338,7 +353,6 @@ function merge(center){
 		document.getElementById("redcount").style.color = color_string;
 		//document.getElementById("redcount").style.color ='#0000';
 	}
-
 	else if (com_hex.length == 2){
     color_string = '#ff' + com_hex + com_hex;
 		//window.alert('#'+decColor.toString(16)+'0000');
@@ -392,7 +406,7 @@ function merge(center){
     cheat_string = "洗牌次數: " + cheat + " 次  ( < " + cheat_threshold +" )\n"
     message = merge_string + cheat_string + "\n評分："+level_string+ "\n" ;
 
-		window.alert(message + post_comment);
+		window.alert(message + post_comment + "\n\n 點擊確認重新開始");
     window.location.reload();
 		//location.reload();
 	}
