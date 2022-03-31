@@ -34,7 +34,7 @@ h1{
 }
 h2{
     display: inline;
-    color: #cccccc;
+    color: #ffffff;
 }
 body {
     background-image: url('./bg_map.jpg');
@@ -66,6 +66,7 @@ button:hover {
 <h2 id ="merge">#Merged 次數 - 0　　</h2>
 <h2 id ="red">red - </h2>
 <h2 id ="redcount">0/36　　</h2>
+<br>
 <h2 id ="cheat">洗牌次數 - 0 　　</h2>
 <br>
 <br>
@@ -148,7 +149,7 @@ function startGame() {
 	//ulti_state_array();
 	//swap([1,2],[2,2])
 	cheat++;
-	document.getElementById("cheat").innerHTML = "洗牌次數 - "+cheat+"　　";
+	document.getElementById("cheat").innerHTML = "洗牌次數 - " + cheat;
 }
 
 function newray(){
@@ -329,15 +330,19 @@ function merge(center){
 	}
 
 	var decColor = Math.floor(Math.pow((red/36),0.5)*225);
-	if (decColor.toString(16).length == 1){
+  color_string = "";
+  com_hex = (255-decColor).toString(16);
+	if (com_hex.length == 1){
+    color_string = '#ff0' + com_hex + '0' + com_hex
 		//window.alert('#0'+decColor.toString(16)+'0000');
-		document.getElementById("redcount").style.color ='#0'+decColor.toString(16)+'dddd';
+		document.getElementById("redcount").style.color = color_string;
 		//document.getElementById("redcount").style.color ='#0000';
 	}
 
-	else if (decColor.toString(16).length == 2){
+	else if (com_hex.length == 2){
+    color_string = '#ff' + com_hex + com_hex;
 		//window.alert('#'+decColor.toString(16)+'0000');
-		document.getElementById("redcount").style.color ='#'+decColor.toString(16)+'dddd';
+		document.getElementById("redcount").style.color =color_string;
 	}
 
 
@@ -388,6 +393,7 @@ function merge(center){
     message = merge_string + cheat_string + "\n評分："+level_string+ "\n" ;
 
 		window.alert(message + post_comment);
+    window.location.reload();
 		//location.reload();
 	}
 
