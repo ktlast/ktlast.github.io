@@ -14,14 +14,31 @@ p {
     margin-bottom: 1em;
     margin-left: 0;
     margin-right: 0;
-	font-size:32px;
+	  font-size: 20px;
+    color: #f1f1f1;
+}
+p_red{
+    display: inline;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #f05559;
 }
 h1{
     display: inline;
     margin-right: 1;
+    color: #eeeeee;
 }
 h2{
     display: inline;
+    color: #cccccc;
+}
+body {
+    background-image: url('./bg_map.jpg');
+    background-repeat: no-repeat;
 }
 button {
     background-color: #f3f3f3;
@@ -43,7 +60,8 @@ button:hover {
 </head>
 <body onload = "startGame()">
 
-<h1 id ="title">Merge it until all red! </h1>
+
+<h1 id ="title">Merge it until all RED! </h1>
 <br><br>
 <h2 id ="merge">#Merged 次數 - 0　　</h2>
 <h2 id ="red">red - </h2>
@@ -100,7 +118,7 @@ button:hover {
 <br>
 <br>
 <br>
-走投無路 --- >>> <button onclick="startGame()" style="height:30px;width:100px">洗牌</button>
+<p>走投無路 --- >>></p> <button onclick="startGame()" style="height:30px;width:100px">洗牌</button>
 <br>
 <script>
 var current_pos = [];
@@ -313,20 +331,19 @@ function merge(center){
 	var decColor = Math.floor(Math.pow((red/36),0.5)*225);
 	if (decColor.toString(16).length == 1){
 		//window.alert('#0'+decColor.toString(16)+'0000');
-		document.getElementById("redcount").style.color ='#0'+decColor.toString(16)+'0000';
+		document.getElementById("redcount").style.color ='#0'+decColor.toString(16)+'dddd';
 		//document.getElementById("redcount").style.color ='#0000';
 	}
 
 	else if (decColor.toString(16).length == 2){
 		//window.alert('#'+decColor.toString(16)+'0000');
-		document.getElementById("redcount").style.color ='#'+decColor.toString(16)+'0000';
+		document.getElementById("redcount").style.color ='#'+decColor.toString(16)+'dddd';
 	}
 
 
-	if (red > 1) {
+	if (red >= 36) {
     level_max = 5;
     post_comment = "";
-    clicktimes = 144
 
     if ((clicktimes <= 125) && (cheat <= 0)) {
       level = 5;
@@ -390,17 +407,16 @@ function tmp(){
 	}
 
 
-
 </script>
 <br>
 
 
 
-<p><font size=4>1. 點按鈕來試著融合該位置的數字</font></p><br>
-<p><font size=4>2. 若周圍有相同的數字會融合 +1；被吸收的位置會亂數產生新數字</font></p><br>
-<p><font size=4>3. 當超過 4 的時候該位置會變成紅色</font></p><br>
-<p><font size=4>4. 全部的位置都變成紅色就結算囉</font></p><br>
-<p><font size=4>*若你太廢玩到卡住了，只好點 [洗牌]</font></p><br>
+<p>1. 點按鈕來試著融合該位置的數字</font></p><br>
+<p>2. 若周圍有相同的數字會融合</p> <p_red> +1 </p_red> <p>；被吸收的位置會亂數產生新數字</font></p><br>
+<p>3. 當超過 </p> <p_red> 4 </p_red> <p> 的時候該位置會變成紅色</font></p><br>
+<p>4. 全部的位置都變成紅色就結算囉</font></p><br>
+<p>*若你太廢玩到卡住了，只好點 [洗牌]</font></p><br>
 
 </body>
 </html>
